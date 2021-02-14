@@ -12,6 +12,8 @@ print(__doc__)
 # Author: Gael Varoquaux <gael dot varoquaux at normalesup dot org>
 # License: BSD 3 clause
 
+#Test code to learn for sig recognition
+
 # Standard scientific Python imports
 import matplotlib.pyplot as plt
 
