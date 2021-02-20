@@ -1,2 +1,2 @@
-# Dev-SRS
-Dev E-Com Signature Recognition System
+# Dev E-Com SRCS
+Dev E-Com Signature Recognition and Comparison System
