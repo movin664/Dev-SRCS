@@ -3,10 +3,24 @@ function Title(){
     return(
 
         <div className="title">
-            <h1>SRCS</h1>
+            <h1 style={{
+                fontWeight:400
+            }}>SRCS TOOL</h1>
+
         </div>
 
     );
+
+}
+
+function Buttons(){
+    return(
+        <div className="compareANDIdentify">
+            <button className="btnCompare"> Compare signatures</button>
+            <button className="btnIdentify">Identify signature</button>
+        </div>
+
+    );   
 
 }
  
@@ -14,7 +28,11 @@ function Home(){
 
     return(
         
-        <Title/>
+        <section className="homepageBody">
+            <Title/>
+            <Buttons/>
+
+        </section>
 
     );
 

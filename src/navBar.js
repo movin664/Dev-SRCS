@@ -17,7 +17,6 @@ function NavBarTop(){
     );
 
 
-
 }
 function NavBarBottom(){
     return(
