@@ -1,3 +1,4 @@
+import ToolContainer from './tool-container';
 
 function Title(){
     return(
@@ -31,6 +32,7 @@ function Home(){
         <section className="homepageBody">
             <Title/>
             <Buttons/>
+            <ToolContainer/>
 
         </section>
 

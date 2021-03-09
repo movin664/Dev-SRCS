@@ -12,10 +12,7 @@ function NavBarTop(){
             <p>{bankName}</p>
 
         </div>
-
-
     );
-
 
 }
 function NavBarBottom(){
@@ -27,10 +24,7 @@ function NavBarBottom(){
             </div>
         </div>
 
-
     );
-
-
 }
 
 function navBar(){
@@ -41,7 +35,6 @@ function navBar(){
         </header>
 
     );
-
 }
 
 export default navBar;
