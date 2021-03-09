@@ -5,7 +5,7 @@ function Title(){
 
         <div className="title">
             <h1 style={{
-                fontWeight:400
+                fontWeight:500
             }}>SRCS TOOL</h1>
 
         </div>

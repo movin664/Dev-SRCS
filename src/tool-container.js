@@ -9,7 +9,7 @@ function SignaturePad(){
 
         <div className="signaturePad">
             <div className="signatureContainer">
-                <img src={enteredSignature}  alt="signature" height="130px" alt="logo"/>
+                <img src={enteredSignature}  height="130px" alt="signature"/>
             </div>
         </div>
 
@@ -25,6 +25,7 @@ function toolContainer(){
         <div className="toolContainer">
              <h2>{toolName}</h2>
              <SignaturePad/>
+             <p>hello this is just to get extra space</p>
         </div>
 
     );
