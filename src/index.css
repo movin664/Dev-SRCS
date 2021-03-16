@@ -6,11 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 #root{
   background-color: #FCFCFC;
   border:2px solid #aaaaaa;
 }
-
 
 header{
 
@@ -38,7 +38,6 @@ header{
   justify-content: space-between;
   align-items: center;
   height:10vh;
-
 
 }
 .navElements a {
@@ -98,9 +97,9 @@ header{
 }
 .toolContainer{
 
-  margin-top: 5%;
+  margin-top:5%;
   padding:5%;
-  background-color: #fdfdfd;
+  background-color: #ffffff;
   border-radius:15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
@@ -108,24 +107,23 @@ header{
 .toolContainer h2{
 
   text-align: center;
+  margin-bottom:10%;
 
 }
 
 .signaturePad{
 
   background-color:rgb(255, 255, 255);
-  width:40%;
-  padding-top:11%;
-  padding-bottom:11%;
-  padding-left:4%;
-  padding-right:4%;
   border-radius:10px;
+  width:90%;
+  height:85%;
   border:3px solid #003249;
 
 }
 .signatureContainer{
 
   background-color:rgb(255, 255, 255);
+  margin-top: 30%;
 
 }
 img[alt="signature"]{
@@ -142,6 +140,7 @@ img[alt="signature"]{
   padding: 10px;
   font-size: 17px;
   border: none;
+  width:90%;
   border-radius: 5px;
 }
 .search-container button {
@@ -155,6 +154,8 @@ img[alt="signature"]{
 .search-container form{
   border:1px solid black;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
   width:100%;
 
 }
@@ -178,9 +179,56 @@ img[alt="signature"]{
   padding-bottom:8%;
   padding-left:1%;
   padding-right:1%;
+  height:25%;
   border-radius:10px;
   border:3px solid #003249;
 
 
 
+}
+.flex-elements{
+  
+  height:65vh;
+
+}
+
+.leftAllignedElements{
+
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex:1.5;
+  
+
+}
+
+.rightAllignedElements{
+
+  background-color:rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex:1;
+  
+}
+
+.btnCompareContainer button{
+
+  font-family: 'Montserrat', sans-serif;
+  color:white;
+  border-style:none;
+  font-size:1rem;
+  background-color: #E94A64;
+  border-color:#E94A64;
+  padding:2% 4%;
+  border-radius:5px;
+  float:right;
+  margin-top:1%;
+  margin-right:10%;
+  
+}
+.signatureContainerMini{
+
+  margin-top:5%;
 }

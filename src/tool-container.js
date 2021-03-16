@@ -48,6 +48,16 @@ function SignaturePadMini(){
 
 }
 
+function CompareButton(){
+    return(
+
+            <button className="btnCompare"> Compare signatures</button>
+        
+
+    );   
+
+}
+
 function toolContainer(){
 
     return(
@@ -55,7 +65,13 @@ function toolContainer(){
         <div className="toolContainer">
              <h2>{toolName}</h2>
              <div className="flex-elements">
-                <SignaturePad/>
+                <div className="leftAllignedElements">
+                    <SignaturePad/>
+
+                    <div className="btnCompareContainer">
+                        <CompareButton/>
+                    </div>
+                </div>      
                 <div className="rightAllignedElements">
                     <SearchBar/>
                     <SignaturePadMini/>
@@ -63,7 +79,6 @@ function toolContainer(){
                 </div>
                 
             </div>
-             <p>hello this is just to get extra space</p>
         </div>
 
     );
