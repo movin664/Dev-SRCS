@@ -15,6 +15,7 @@ function NavBarTop(){
     );
 
 }
+
 function NavBarBottom(){
     return(
         <div className="navWrapper">
