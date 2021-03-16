@@ -5,6 +5,7 @@ from skimage import img_as_float
 from skimage import io, color, morphology
 from PIL import Image
 import os
+import numpy as np
 
 
 srcImage = Image.open("C:\\Users\\pc\\Desktop\\SDGP\\signature-523237_960_720r.jpg")  # enter the image filename here
@@ -17,7 +18,7 @@ image_binary = image < 0.5
 out_skeletonize = morphology.skeletonize(image_binary)
 out_thin = morphology.thin(image_binary)
 # Problem is here, thinned image can be taken as a binary file but cannot be given as an image
-#np.savetxt("C:\\Users\\pc\\Desktop\\SDGP\\binary3.txt", out_thin, fmt="%d")  # enter output filename here
+np.savetxt("C:\\Users\\pc\\Desktop\\SDGP\\binary3.txt", out_thin, fmt="%d")  # enter output filename here
 
 # Remove hashtag to display the difference between normal image, skeleton and thin
 

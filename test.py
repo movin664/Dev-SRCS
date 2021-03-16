@@ -3,7 +3,7 @@ from PIL import ImageFilter
 import imagehash
 
 img1 = Image.open(r"C:\\Users\\pc\\Desktop\\SDGP\\y_026r.jpeg")  # Enter image one here
-img2 = Image.open(r"C:\\Users\\pc\\Desktop\\SDGP\\signature-523237_960_720r.jpg")  # Enter image two here
+img2 = Image.open(r"C:\\Users\\pc\\Desktop\\SDGP\\y_027r.jpeg")  # Enter image two here
 # Resizing the images to be equal to each other in size
 if img1.width < img2.width or img1.height < img2.height:
     img2 = img2.resize((img1.width, img1.height))
