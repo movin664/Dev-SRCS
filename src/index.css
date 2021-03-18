@@ -102,7 +102,7 @@ header{
   background-color: #ffffff;
   border-radius:15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+  padding-bottom:20%;
 }
 .toolContainer h2{
 
@@ -231,4 +231,26 @@ img[alt="signature"]{
 .signatureContainerMini{
 
   margin-top:5%;
+}
+Footer{
+
+  background-color: #003249 ;
+  width:100%;
+  margin-top:10%;
+
+}
+img[alt="upload signature"]{
+
+  float:right;
+  margin-top:11%;
+  margin-right:5%;
+
+
+}
+img[alt="upload signature"]:hover{
+
+  transform: scale(1.07 );
+  transition: transform 0.3s;
+
+
 }

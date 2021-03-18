@@ -1,5 +1,4 @@
-var matchPercentage=71
-var matchPercentageString=""+ matchPercentage
+var matchPercentage=0
 var matchPercentageName="c100 p"+ matchPercentage;
 
 
@@ -10,6 +9,11 @@ function SignatureStatus(){
         return <h3>Authentic</h3>
         
     }
+    if(matchPercentage==0){
+
+        return <h3>Status...</h3>
+
+    }
     return <h3>Forged</h3>
 
 }
@@ -19,13 +23,13 @@ function percentageCircle(){
 
     return(
 
-    <div class="clearfix">
+    <div className="clearfix">
 
                 <div className={matchPercentageName}>
                     <span>{matchPercentage}%</span>
-                    <div class="slice">
-                        <div class="bar"></div>
-                        <div class="fill"></div>
+                    <div className="slice">
+                        <div className="bar"></div>
+                        <div className="fill"></div>
                     </div>
                     
                 </div>

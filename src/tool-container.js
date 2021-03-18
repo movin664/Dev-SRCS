@@ -1,10 +1,47 @@
 import dummySignature from './dummySignature.png';
+import dummySignature2 from './dummySignature2.png';
 import PercentageCircle from './percentageCircle';
+import AddButton from './add.png';
+import { useState } from 'react';
 
-const toolName="compare signatures"
-var enteredSignature=dummySignature;
+const toolName="compare signatures" // heading at the top which changes according to selected option
+
 
 function SignaturePad(){
+
+    //let enteredSignature=dummySignature2; //dummy signature
+
+    const[enteredSignature,setSignature]=useState(dummySignature);  //to monitor the changes done to the state of the signature every time the user selects
+
+
+    //this function reads the users selected file and previews it in the signature pad
+    const imageHandler=(e)=>{
+
+        const selected=e.target.files[0];
+
+        let reader=new FileReader();
+        reader.onloadend=()=> {
+            setSignature(reader.result);
+        }
+        reader.readAsDataURL(selected);
+        console.log(selected);
+        
+    }
+
+    /*imageHandler = (e) =>{
+        const reader=new FileReader();
+
+        reader.onload=()=>{
+            if (reader.readyState===2){
+
+                this.setState({enteredSignature: reader.result})
+            
+            reader.readAsDataURL(e.target.files[0]);
+            }
+
+        }
+    }*/
+
 
     return(
 
@@ -12,6 +49,9 @@ function SignaturePad(){
             <div className="signatureContainer">
                 <img src={enteredSignature}  height="130px" alt="signature"/>
             </div>
+            <input type="file" id="uploadSig" name="uploadSig" accept="image/*"style={{display:'none',visiblity:'none'}}  onChange={imageHandler}></input>
+            <label for="uploadSig"><img src={AddButton} height="50px" alt="upload signature"/></label>
+            
         </div>
 
 
@@ -35,6 +75,8 @@ function SearchBar(){
 }
 function SignaturePadMini(){
 
+    let enteredSignature=dummySignature2; //dummy signature
+
     return(
 
         <div className="signaturePadMini">
@@ -48,17 +90,21 @@ function SignaturePadMini(){
 
 }
 
+
 function CompareButton(){
     return(
 
-            <button className="btnCompare"> Compare signatures</button>
+            <button className="btnCompare" > Compare signatures</button>
         
 
     );   
 
 }
 
+
 function toolContainer(){
+
+    //const[matchPercentage,setMatchPercentage]=useState(0);
 
     return(
    
@@ -84,6 +130,8 @@ function toolContainer(){
     );
 
 }
+
+
 
 
 export default toolContainer;
