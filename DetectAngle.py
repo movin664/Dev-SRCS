@@ -4,7 +4,7 @@ import argparse
 import cv2
 
 # load the image from disk
-image = cv2.imread("C:\\Users\\pc\\Desktop\\SDGP\\y_003r.jpeg")
+image = cv2.imread("C:\\Users\\pc\\Desktop\\SDGP\\y_045.jpeg")
 # convert the image to grayscale and flip the foreground
 # and background to ensure foreground is now "white" and
 # the background is "black"
@@ -44,4 +44,4 @@ rotated = cv2.warpAffine(image, M, (w, h),
 # show the output image
 print("[INFO] angle: {:.3f}".format(angle))
 # cv2.imshow("Input", image)
-cv2.imwrite("C:\\Users\\pc\\Desktop\\SDGP\\rot-page-002rectified.jpg", rotated)
+cv2.imwrite("C:\\Users\\pc\\Desktop\\SDGP\\y_045Rotated.jpeg", rotated)

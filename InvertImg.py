@@ -2,8 +2,8 @@
 from PIL import Image
 import PIL.ImageOps
 
-image = Image.open('C:\\Users\\pc\\Desktop\\SDGP\\y_027.jpeg')
+image = Image.open('C:\\Users\\pc\\Desktop\\SDGP\\y_045.jpeg')
 
 inverted_image = PIL.ImageOps.invert(image)  # PILLOW inverts in one line of code
 
-inverted_image.save('C:\\Users\\pc\\Desktop\\SDGP\\y_027.jpeg')
+inverted_image.save('C:\\Users\\pc\\Desktop\\SDGP\\y_045.jpeg')
