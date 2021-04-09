@@ -17,7 +17,9 @@ def thinArray(ilocation):
 
     im = Image.fromarray(out_thin)
     im.save(ilocation)
-    invertImg(ilocation)
+    im = Image.fromarray(invertImg(ilocation))
+    im.save(ilocation)
+
 
 
 def DetectAngle(ilocation):
@@ -65,12 +67,37 @@ def invertImg(ilocation):
     image = Image.open(ilocation)
 
     inverted_image = PIL.ImageOps.invert(image)  # PILLOW inverts in one line of code
+    opencvImage = cv2.cvtColor(np.array(inverted_image), cv2.COLOR_RGB2BGR)
+    # inverted_image.save(ilocation)
+    return opencvImage
 
-    inverted_image.save(ilocation)
+def checkImgBG(ilocation):
+    image = cv2.imread(ilocation)
+    # h, w, _ = image.shape
+    # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
+    #
+    # pixels = cv2.countNonZero(thresh)
+    # ratio = (pixels / (h * w)) * 100
+    # if ratio < 50:
+    #     return False
+    # else:
+    #     return True
+
+    whitepixels = np.sum(image == 255)
+    blackpixels = np.sum(image == 0)
+    if whitepixels > blackpixels:
+        return False
+    else:
+        return True
 
 
 def removeWhiteSpace(ilocation, slocation):
-    img = cv2.imread(ilocation)  # Read in the image and convert to grayscale
+    # global img
+    if checkImgBG(ilocation):
+        img = invertImg(ilocation)
+    else:
+        img = cv2.imread(ilocation)  # Read in the image and convert to grayscale
     img = img[:-20, :-20]  # Perform pre-cropping
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     gray = 255 * (gray < 128).astype(np.uint8)  # To invert the text to white
@@ -79,6 +106,7 @@ def removeWhiteSpace(ilocation, slocation):
     x, y, w, h = cv2.boundingRect(coords)  # Find minimum spanning bounding box
     rect = img[y:y + h, x:x + w]  # Crop the image - note we do this on the original image
     cv2.imwrite(slocation, rect)  # Save the image
+
 
 def compare(imgone, imgtwo):
     img1 = Image.open(imgone)  # Enter image one here
@@ -106,9 +134,9 @@ def compare(imgone, imgtwo):
 
 
 if __name__ == '__main__':
-    # invertImg("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_056.jpeg","C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_056.jpeg")
-    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_056.jpeg","C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_056.jpeg")
-    DetectAngle("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_056.jpeg")
-    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_056.jpeg","C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_056.jpeg")
-    thinArray("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_056.jpeg")
-    compare("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_054.jpeg","C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_101.jpeg")
+    # invertImg("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg")
+    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg","C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
+    DetectAngle("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
+    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg","C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
+    thinArray("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
+    compare("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_046.jpeg", "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
