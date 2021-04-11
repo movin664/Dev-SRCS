@@ -6,6 +6,8 @@ import cv2
 import PIL.ImageOps
 import imagehash
 from PIL import ImageFilter
+import mysql.connector
+import io as InOut
 
 
 def thinArray(ilocation):
@@ -19,7 +21,6 @@ def thinArray(ilocation):
     im.save(ilocation)
     im = Image.fromarray(invertImg(ilocation))
     im.save(ilocation)
-
 
 
 def DetectAngle(ilocation):
@@ -59,7 +60,7 @@ def DetectAngle(ilocation):
                              flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
 
     print("[INFO] angle: {:.3f}".format(angle))
-    if 40 > angle > -40:
+    if 45 > angle > -45:
         cv2.imwrite(ilocation, rotated)
 
 
@@ -70,6 +71,7 @@ def invertImg(ilocation):
     opencvImage = cv2.cvtColor(np.array(inverted_image), cv2.COLOR_RGB2BGR)
     # inverted_image.save(ilocation)
     return opencvImage
+
 
 def checkImgBG(ilocation):
     image = cv2.imread(ilocation)
@@ -109,7 +111,7 @@ def removeWhiteSpace(ilocation, slocation):
 
 
 def compare(imgone, imgtwo):
-    img1 = Image.open(imgone)  # Enter image one here
+    img1 = imgone  # Enter image one here
     img2 = Image.open(imgtwo)  # Enter image two here
     # Resizing the images to be equal to each other in size
     if img1.width < img2.width or img1.height < img2.height:
@@ -133,10 +135,41 @@ def compare(imgone, imgtwo):
     print(100 - totalaccuracy, "%")
 
 
+def readBlobImg(id):
+    print("Reading BLOB data from originals table")
+
+    try:
+        connection = mysql.connector.connect(host='localhost',
+                                             database='dev_e_com_srvs',
+                                             user='root',
+                                             password='')
+
+        cursor = connection.cursor()
+        sql_fetch_blob_query = """SELECT img from originals where CustId = %s"""
+
+        cursor.execute(sql_fetch_blob_query, (id,))
+        record = cursor.fetchall()
+        file_like2 = InOut.BytesIO(record[0][0])
+        img1 = Image.open(file_like2)
+        # img1.show()
+        return img1
+
+    except mysql.connector.Error as error:
+        print("Failed to read BLOB data from MySQL table {}".format(error))
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
 if __name__ == '__main__':
     # invertImg("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg")
-    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg","C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
+    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg",
+                     "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
     DetectAngle("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
-    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg","C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
+    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg",
+                     "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
     thinArray("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
-    compare("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_046.jpeg", "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
+    compare(readBlobImg(47), "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
