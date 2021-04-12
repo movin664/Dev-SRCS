@@ -14,7 +14,7 @@ function SignaturePad(){
     const[enteredSignature,setSignature]=useState(dummySignature);  //to monitor the changes done to the state of the signature every time the user selects
 
 
-    //this function reads the users selected file and previews it in the signature pad
+    //this function reads the users selected file and previews it in the signature pad(customer entered signature)
     const imageHandler=(e)=>{
 
         const selected=e.target.files[0];
@@ -24,7 +24,7 @@ function SignaturePad(){
             setSignature(reader.result);
         }
         reader.readAsDataURL(selected);
-        console.log(selected);
+        console.log(selected); // to test  if the correct signature was selected
         
     }
 
@@ -47,17 +47,18 @@ function SignaturePad(){
 
         <div className="signaturePad">
             <div className="signatureContainer">
-                <img src={enteredSignature}  height="130px" alt="signature"/>
+                <img src={enteredSignature}  height="100%" width="80%" alt="signature"/>
             </div>
             <input type="file" id="uploadSig" name="uploadSig" accept="image/*"style={{display:'none',visiblity:'none'}}  onChange={imageHandler}></input>
-            <label for="uploadSig"><img src={AddButton} height="50px" alt="upload signature"/></label>
+            <label htmlFor="uploadSig"><img src={AddButton} height="50px" alt="upload signature"/></label>
             
         </div>
 
-
+ 
     );
 
 }
+
 function SearchBar(){
 
     return(
@@ -81,7 +82,7 @@ function SignaturePadMini(){
 
         <div className="signaturePadMini">
             <div className="signatureContainerMini">
-                <img src={enteredSignature}  height="80px" alt="signature"/>
+                <img src={enteredSignature}  height="100%" width="80%" alt="signature"/>
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-var matchPercentage=0
+var matchPercentage=50;
 var matchPercentageName="c100 p"+ matchPercentage;
 
 
