@@ -15,13 +15,12 @@ def thinArray(ilocation):
 
     image_binary = image < 0.5
     # out_skeletonize = morphology.skeletonize(image_binary)
-    out_thin = morphology.skeletonize(image_binary)
+    out_thin = morphology.thin(image_binary)
 
     im = Image.fromarray(out_thin)
     im.save(ilocation)
     im = Image.fromarray(invertImg(ilocation))
     im.save(ilocation)
-
 
 def DetectAngle(ilocation):
     image = cv2.imread(ilocation)
