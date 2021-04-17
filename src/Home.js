@@ -16,9 +16,11 @@ function Title(){
 
 function Buttons(){
     return(
-        <div className="compareANDIdentify">
-            <button className="btnCompare"> Compare signatures</button>
-            <button className="btnIdentify">Identify signature</button>
+
+        // compare button and identify signature button on home page
+        <div className="mainFunctionalityButtons">
+            <button className="btn1"> Compare signatures</button>
+            <button className="btn2">Identify signature</button>
         </div>
 
     );   

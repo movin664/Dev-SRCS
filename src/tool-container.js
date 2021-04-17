@@ -2,6 +2,7 @@ import dummySignature from './dummySignature.png';
 import dummySignature2 from './dummySignature2.png';
 import PercentageCircle from './percentageCircle';
 import AddButton from './add.png';
+import SearchBar from './SearchBar';
 import { useState } from 'react';
 
 const toolName="compare signatures" // heading at the top which changes according to selected option
@@ -57,20 +58,6 @@ function SignaturePad(){
  
     );
 
-}
-
-function SearchBar(){
-
-    return(
-
-        <div className="search-container">
-            <form action="/action_page.php">
-                 <input type="text" placeholder="Search.." name="search"/>
-                    <button type="submit"><i className="fa fa-search" aria-hidden="true"></i></button>
-            </form>
-        </div>
-
-    );
 
 
 }
@@ -96,7 +83,7 @@ function CompareButton(){
     return(
 
             <button className="btnCompare" > Compare signatures</button>
-        
+   
 
     );   
 

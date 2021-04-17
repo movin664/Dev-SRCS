@@ -1,4 +1,5 @@
 import logo from './logo.png';
+import {Link} from 'react-router-dom';
 
 function NavBarTop(){
 
@@ -20,8 +21,8 @@ function NavBarBottom(){
     return(
         <div className="navWrapper">
             <div className="navElements">
-                <a href="/">SRCS</a>
-                <a href="/">Registered members</a>    
+                <Link to="/">SRCS</Link>
+                <Link to="/members">Registered members</Link>    
             </div>
         </div>
 
