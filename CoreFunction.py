@@ -9,19 +9,22 @@ from PIL import ImageFilter
 import mysql.connector
 import io as InOut
 
-
+# This method thins the image by reducing the number of pixels across the thickness
 def thinArray(ilocation):
     image = img_as_float(color.rgb2gray(io.imread(ilocation)))
 
-    image_binary = image < 0.5
-    # out_skeletonize = morphology.skeletonize(image_binary)
-    out_thin = morphology.thin(image_binary)
+    image = image < 0.5
+    thin_out = morphology.skeletonize(image)
 
-    im = Image.fromarray(out_thin)
+    im = Image.fromarray(thin_out)
     im.save(ilocation)
     im = Image.fromarray(invertImg(ilocation))
     im.save(ilocation)
 
+# Title: skew correction source code
+# Author: Adrian Rosebrock based on Félix Abecassis's "opencv rotation"
+# Date: 20/02/2017
+# Availability: https://www.pyimagesearch.com/2017/02/20/text-skew-correction-opencv-python/
 def DetectAngle(ilocation):
     image = cv2.imread(ilocation)
     # convert the image to grayscale and flip the foreground
@@ -31,8 +34,7 @@ def DetectAngle(ilocation):
     gray = cv2.bitwise_not(gray)
     # threshold the image, setting all foreground pixels to
     # 255 and all background pixels to 0
-    thresh = cv2.threshold(gray, 0, 255,
-                           cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+    thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 
     # grab the (x, y) coordinates of all pixel values that
     # are greater than zero, then use these coordinates to
@@ -66,25 +68,14 @@ def DetectAngle(ilocation):
 def invertImg(ilocation):
     image = Image.open(ilocation)
 
-    inverted_image = PIL.ImageOps.invert(image)  # PILLOW inverts in one line of code
-    opencvImage = cv2.cvtColor(np.array(inverted_image), cv2.COLOR_RGB2BGR)
-    # inverted_image.save(ilocation)
+    image = PIL.ImageOps.invert(image)
+    opencvImage = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+
     return opencvImage
 
 
 def checkImgBG(ilocation):
     image = cv2.imread(ilocation)
-    # h, w, _ = image.shape
-    # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    # thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
-    #
-    # pixels = cv2.countNonZero(thresh)
-    # ratio = (pixels / (h * w)) * 100
-    # if ratio < 50:
-    #     return False
-    # else:
-    #     return True
-
     whitepixels = np.sum(image == 255)
     blackpixels = np.sum(image == 0)
     if whitepixels > blackpixels:
@@ -94,11 +85,14 @@ def checkImgBG(ilocation):
 
 
 def removeWhiteSpace(ilocation, slocation):
-    # global img
     if checkImgBG(ilocation):
         img = invertImg(ilocation)
     else:
-        img = cv2.imread(ilocation)  # Read in the image and convert to grayscale
+        img = cv2.imread(ilocation)
+    # Title: remove whitespace source code
+    # Author: https://stackoverflow.com/users/3250829/rayryeng
+    # Date: 18/04/2018
+    # Availability: https://stackoverflow.com/questions/49907382/how-to-remove-whitespace-from-an-image-in-opencv
     img = img[:-20, :-20]  # Perform pre-cropping
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     gray = 255 * (gray < 128).astype(np.uint8)  # To invert the text to white
@@ -127,7 +121,7 @@ def compare(imgone, imgtwo):
     # we actually want our similar inputs to have similar output hashes as well.
     # The image hash algorithms (average, perceptual, difference, wavelet) analyse the image structure on luminance (
     # without color information). The color hash algorithm analyses the color distribution and black & gray fractions (
-    # without position information).
+    # without position information). Source: https://pypi.org/project/ImageHash/
     phashvalue = imagehash.phash(img1) - imagehash.phash(img2)
     ahashvalue = imagehash.average_hash(img1) - imagehash.average_hash(img2)
     totalaccuracy = phashvalue + ahashvalue
@@ -150,7 +144,6 @@ def readBlobImg(id):
         record = cursor.fetchall()
         file_like2 = InOut.BytesIO(record[0][0])
         img1 = Image.open(file_like2)
-        # img1.show()
         return img1
 
     except mysql.connector.Error as error:
