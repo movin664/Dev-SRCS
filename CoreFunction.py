@@ -60,7 +60,7 @@ def DetectAngle(ilocation):
     rotated = cv2.warpAffine(image, M, (w, h),
                              flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
 
-    print("[INFO] angle: {:.3f}".format(angle))
+    # print("[INFO] angle: {:.3f}".format(angle))
     if 45 > angle > -45:
         cv2.imwrite(ilocation, rotated)
 
@@ -129,7 +129,6 @@ def compare(imgone, imgtwo):
 
 
 def readBlobImg(id):
-    print("Reading BLOB data from originals table")
 
     try:
         connection = mysql.connector.connect(host='localhost',
@@ -153,15 +152,13 @@ def readBlobImg(id):
         if connection.is_connected():
             cursor.close()
             connection.close()
-            print("MySQL connection is closed")
 
 
 if __name__ == '__main__':
-    # invertImg("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg")
-    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg",
-                     "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
-    DetectAngle("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
-    removeWhiteSpace("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg",
-                     "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
-    thinArray("C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
-    compare(readBlobImg(47), "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg")
+    x = "C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg"
+    y = "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg"
+    removeWhiteSpace(x, y)
+    DetectAngle(y)
+    removeWhiteSpace(y, y)
+    thinArray(y)
+    compare(readBlobImg(47), y)
