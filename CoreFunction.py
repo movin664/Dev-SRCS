@@ -1,3 +1,4 @@
+# Import the necessary libraries  and modules
 from skimage import img_as_float
 from skimage import io, color, morphology
 from PIL import Image
@@ -108,6 +109,7 @@ def removeWhiteSpace(ilocation, slocation):
     cv2.imwrite(slocation, rect)  # Save the image
 
 
+# Method to compare the two images and return the similarity percentage
 def compare(imgone, imgtwo):
     img1 = imgone  # Enter image one here
     img2 = Image.open(imgtwo)  # Enter image two here
@@ -121,9 +123,9 @@ def compare(imgone, imgtwo):
     img1 = img1.filter(ImageFilter.BoxBlur(radius=3))
     img2 = img2.filter(ImageFilter.BoxBlur(radius=3))
 
-    # Image hashes tell whether two images look nearly identical. This is different from cryptographic hashing algorithms
-    # (like MD5, SHA-1) where tiny changes in the image give completely different hashes. In image fingerprinting,
-    # we actually want our similar inputs to have similar output hashes as well.
+    # Image hashes tell whether two images look nearly identical. This is different from cryptographic hashing
+    # algorithms (like MD5, SHA-1) where tiny changes in the image give completely different hashes. In image
+    #  fingerprinting, we actually want our similar inputs to have similar output hashes as well.
     # The image hash algorithms (average, perceptual, difference, wavelet) analyse the image structure on luminance (
     # without color information). The color hash algorithm analyses the color distribution and black & gray fractions (
     # without position information). Source: https://pypi.org/project/ImageHash/
@@ -133,8 +135,9 @@ def compare(imgone, imgtwo):
     print(100 - totalaccuracy, "%")
 
 
+# Method to connect to database and return the original image of the entered customer id
 def readBlobImg(id):
-
+    # try to connect to the mysql server and execute the command to retrieve the image as a blob
     try:
         connection = mysql.connector.connect(host='localhost',
                                              database='dev_e_com_srvs',
