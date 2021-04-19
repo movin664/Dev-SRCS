@@ -65,19 +65,24 @@ def DetectAngle(ilocation):
         cv2.imwrite(ilocation, rotated)
 
 
+# This method returns the color inverted image of the entered image.
+# Mainly used to change the images with black background and white foreground
+# So that removeWhiteSpace method can run correctly
 def invertImg(ilocation):
-    image = Image.open(ilocation)
+    image = Image.open(ilocation)  # Loads the image to local variable
 
-    image = PIL.ImageOps.invert(image)
-    opencvImage = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+    image = PIL.ImageOps.invert(image)  # Uses pillow to invert the image
+    opencvImage = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)  # loads the pil img to an opencv img
 
     return opencvImage
 
 
+# This method is responsible for checking the background and foreground of an image
+# returns true if the background of the image is black anf foreground white
 def checkImgBG(ilocation):
-    image = cv2.imread(ilocation)
-    whitepixels = np.sum(image == 255)
-    blackpixels = np.sum(image == 0)
+    image = cv2.imread(ilocation)  # loading the image to an opencv variable
+    whitepixels = np.sum(image == 255)  # Using numpy to return the number of white pixels i.e.,hexadecimal value 255
+    blackpixels = np.sum(image == 0)  # Using numpy to return the number of black pixels i.e.,hexadecimal value 0
     if whitepixels > blackpixels:
         return False
     else:
