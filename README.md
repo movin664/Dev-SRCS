@@ -10,5 +10,6 @@ scikit-image \
 imagehash \
 OpenCV --> cv2 \
 And other libraries that come with the bundle
+See requirements.txt for full set of requirements.
 
 
