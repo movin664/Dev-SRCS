@@ -174,4 +174,3 @@ if __name__ == '__main__':
     removeWhiteSpace(y, y)
     thinArray(y)
     compare(readBlobImg(101), y)
-    compare(readBlobImg(101), y)

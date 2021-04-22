@@ -156,7 +156,7 @@ function SignaturePadMini({enteredCustId}){
     
             //console.log("the useState: "+customerId)
 
-            //console.log(typeof(response.data.CustId))
+            console.log(response.data.CustId);
             
 
             console.log("this is the correct number " +enteredCustId);
