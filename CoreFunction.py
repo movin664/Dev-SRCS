@@ -9,6 +9,8 @@ import imagehash
 from PIL import ImageFilter
 import mysql.connector
 import io as InOut
+import requests
+
 
 # This method thins the image by reducing the number of pixels across the thickness
 def thinArray(ilocation):

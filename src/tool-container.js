@@ -226,12 +226,6 @@ function ToolContainer(){
     const[enteredCustId,setCustId]=useState(12345)
     const [ImageFile,setImageFile]=useState("");
 
-
-
-    
-
-
-
     const [data,setData]=useState({
 
         custId:"",
