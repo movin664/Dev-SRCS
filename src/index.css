@@ -137,7 +137,7 @@ img[alt="signature"]{
 }
 
 /* css for the search bar */
-.search-container input[type=text] {
+.search-container input[type=number] {
   padding: 10px;
   font-size: 17px;
   border: none;
@@ -243,12 +243,13 @@ Footer{
 }
 img[alt="upload signature"]{
 
+  position:relative;
   float:right;
-  margin-top:11%;
-  margin-right:5%;
-
+  top:17%;
+  right:3%;
 
 }
+
 img[alt="upload signature"]:hover{
 
   transform: scale(1.07 );
