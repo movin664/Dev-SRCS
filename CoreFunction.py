@@ -171,4 +171,16 @@ if __name__ == '__main__':
     DetectAngle(y)
     removeWhiteSpace(y, y)
     thinArray(y)
-    compare(readBlobImg(47), y)
+    compare(readBlobImg(12345), y)
+
+
+get = requests.get('http://localhost:3001/api/get') # GET request 
+data = get.json() 
+# process this JSON data and do something with it 
+print(data)  
+ 
+newdata = {"foo": "bar", "kaa":"pa"} # this is the new data you're going to send to the Node server 
+ 
+# now immediately sending a post request with new data 
+post = requests.post('http://localhost:3001/api/get', json=newdata) # the POST request 
+print(post.text)

@@ -248,6 +248,9 @@ function ToolContainer(){
 
     }
 
+    // var json_data=JSON.parse(data);
+    //     console.log(json_data);
+
     useEffect(()=>{
         
         
@@ -273,7 +276,8 @@ function ToolContainer(){
         //setData.custId=enteredCustId;
         data.address=`${ImageFile}`;
 
-        console.log(data);
+        
+        
         console.log("image changed "+ImageFile)
         //console.log(typeof(enteredCustId));
 
