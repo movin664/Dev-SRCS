@@ -9,8 +9,6 @@ import imagehash
 from PIL import ImageFilter
 import mysql.connector
 import io as InOut
-import requests
-
 
 # This method thins the image by reducing the number of pixels across the thickness
 def thinArray(ilocation):
@@ -165,10 +163,10 @@ def readBlobImg(id):
 
 
 if __name__ == '__main__':
-    x = "C:\\Users\\pc\\Desktop\\SDGP\\Tests\\y_047.jpeg"
-    y = "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_047.jpeg"
+    x = r"C:\\Users\\pc\\Desktop\\SDGP\\tests\\y_102.jpeg"
+    y = "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_102.jpeg"
     removeWhiteSpace(x, y)
     DetectAngle(y)
     removeWhiteSpace(y, y)
     thinArray(y)
-    compare(readBlobImg(47), y)
+    compare(readBlobImg(101), y)
