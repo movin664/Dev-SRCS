@@ -237,7 +237,8 @@ function ToolContainer(){
     function post(e){
 
         e.preventDefault();
-        Axios.post("http://localhost:3001/api/post",{
+        //console.log(data.custId);
+        Axios.post("http://localhost:5000/test",{
             
             custId: data.custId,
             address: data.address

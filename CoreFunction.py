@@ -10,6 +10,7 @@ from PIL import ImageFilter
 import mysql.connector
 import io as InOut
 
+
 # This method thins the image by reducing the number of pixels across the thickness
 def thinArray(ilocation):
     image = img_as_float(color.rgb2gray(io.imread(ilocation)))
@@ -110,7 +111,9 @@ def removeWhiteSpace(ilocation, slocation):
 
 
 # Method to compare the two images and return the similarity percentage
+
 def compare(imgone, imgtwo):
+    
     img1 = imgone  # Enter image one here
     img2 = Image.open(imgtwo)  # Enter image two here
     # Resizing the images to be equal to each other in size
@@ -132,7 +135,8 @@ def compare(imgone, imgtwo):
     phashvalue = imagehash.phash(img1) - imagehash.phash(img2)
     ahashvalue = imagehash.average_hash(img1) - imagehash.average_hash(img2)
     totalaccuracy = phashvalue + ahashvalue
-    print(100 - totalaccuracy, "%")
+    percentage = str(100 - totalaccuracy)
+    return percentage
 
 
 # Method to connect to database and return the original image of the entered customer id
