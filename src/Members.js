@@ -35,6 +35,7 @@ function SearchBar(){
 function Buttons(){
 
     const [buttonPopup,setButtonPopup]=useState(false);
+ 
 
     return(
 
@@ -46,7 +47,7 @@ function Buttons(){
             <button className="btn1" onClick={()=>setButtonPopup(true)}> Add member &nbsp; &nbsp;<i className="fa fa-plus" aria-hidden="true"></i></button>
             <SearchBar/>
             <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                    <h3>My popup</h3>
+                    <h3>Register member</h3>
             </Popup>
             
         </div>

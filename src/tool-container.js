@@ -1,9 +1,8 @@
-//import dummySignature from './dummySignature.png';
-import dummySignature2 from './dummySignature2.png';
-import PercentageCircle from './percentageCircle';
 import AddButton from './add.png';
 import { useState,useEffect} from 'react';
 import Axios from "axios";
+import IMAGES from './images.js'
+
 
 const toolName="compare signatures" // heading at the top which changes according to selected option
 
@@ -14,67 +13,30 @@ function SignaturePad({setImageFile}){
     //let enteredSignature=dummySignature2; //dummy signature
  
     const[enteredSignature,setSignature]=useState("");  //to monitor the changes done to the state of the signature every time the user selects
-    //const fileURL="C:\\Users\\andre\\Desktop\\SDGP_SIG\\"
-    //console.log(filePath)//testing if the correct file path is added
-
-    //this function reads the users selected file and previews it in the signature pad(customer entered signature)
-
-
+    
         const imageHandler=(e)=>{
 
             const selected=e.target.files[0];
             let reader=new FileReader();
             reader.readAsDataURL(selected);
-            //setImageFile(fileURL+selected.name)
-
-            
-
-            setImageFile(reader.result);
-
             console.log(selected.name);//testing if right file was selected\
-            //setFilePath(fileURL+selected.name);
+        
 
+
+        try{
             reader.onloadend=()=> {
                 setSignature(reader.result);
-                setImageFile(reader.result)
-                //console.log(reader.result)
-                //setFilePath(fileURL+selected.name);
-                
-                
-                
-
-                // var textChunk = reader.result.toString('utf8')
-                // setFilePath(textChunk)
-                // setImageFile(filePath)
-                //console.log(filePath)
-                //setFilePath("filepath= "+fileURL+selected.name)
-                //console.log(reader.result)//testing the binary data,which will be added to api
+                setImageFile(selected.name)
+               
             }
+        }catch{
 
-
-            //setFilePath(reader.result)
-            //reader.readAsDataURL(selected);
-            //console.log(reader.result)
-            //setFilePath("filepath= "+fileURL+selected.name);
-            //console.log(filePath); // to test  if the correct signature was selected
-            
-            
+            console.log("OOps you closed without picking a signature...")
         }
 
 
-    /*imageHandler = (e) =>{
-        const reader=new FileReader();
-
-        reader.onload=()=>{
-            if (reader.readyState===2){
-
-                this.setState({enteredSignature: reader.result})
             
-            reader.readAsDataURL(e.target.files[0]);
-            }
-
         }
-    }*/
 
 
     return(
@@ -93,11 +55,15 @@ function SignaturePad({setImageFile}){
 
 
 
+
 }
 
 function SearchBar({setCustId}){
 
-    const[customerId,setCustomerId]=useState(1211);
+
+    
+
+    const[customerId,setCustomerId]=useState("");
 
 
             const handleChange=(event)=>{
@@ -112,7 +78,7 @@ function SearchBar({setCustId}){
 
                 event.preventDefault();
               
-                setCustId(parseInt(customerId));
+                setCustId(customerId);
                 console.log("in searech bar : "+typeof(customerId));
                 console.log(`A customer submitted: ${customerId}`);                
 
@@ -135,70 +101,58 @@ function SearchBar({setCustId}){
 }
 
 
+
+function RenderImage({enteredCustId}){
+
+    console.log("in reder image"+enteredCustId)
+    console.log(typeof(enteredCustId));
+
+    try{
+            if (parseInt(enteredCustId)===999){
+
+            return <img src={IMAGES.signature_999} height="80px" width="300px" alt='signature' />
+            }
+            else if (parseInt(enteredCustId)===2249){
+
+                return <img src={IMAGES.signature_2249} height="80px" width="300px" alt='signature' />
+            }
+            else if (parseInt(enteredCustId)===12311){
+
+                return <img src={IMAGES.signature_12311} height="80px" width="300px" alt='signature' />
+            }
+            else if (parseInt(enteredCustId)===23432){
+
+                return <img src={IMAGES.signature_23432} height="80px" width="300px" alt='signature' />
+            }
+
+            return  <img src={""} height="80px" width="300px" alt='signature' />
+
+        }catch{
+            alert("invalid customer id")
+        }
+
+
+}
+
+
 function SignaturePadMini({enteredCustId}){
 
-    const[value,setValue]=useState("");
-    //const[customerId,setCustomerId]=useState(enteredCustId);
-    console.log(enteredCustId)
-    //const[originalsList,setOriginalsList]=useState([]);
 
-    // console.log(typeof(enteredCustId));
 
-    useEffect(()=>{
- 
-        Axios.get('http://localhost:3001/api/get').then((response)=>{
+    console.log("in signaturePadMini"+enteredCustId);
 
-            //setOriginalsList(response.data)
-            console.log(response.data);
-            //console.log(enteredCustId);
-            //console.log(typeof(enteredCustId))
-            //console.log(customerId);
-    
-            //console.log("the useState: "+customerId)
 
-            console.log(response.data.CustId);
-            
+    console.log(`./Test/Originals/${enteredCustId}`);
+    console.log(typeof(enteredCustId));
 
-            console.log("this is the correct number " +enteredCustId);
-            //setCustomerId(number);
-
-            
-            let selectedItem = response.data.find(item => item.CustId === enteredCustId)
-            let data = selectedItem.img;
-            var imageURL = 'data:image/png;base64,' + new Buffer(data, 'binary').toString('base64');
-            setValue(imageURL);
-
-        })
-            
-
-    
-    },[enteredCustId])
-            
-
-    /*useEffect(() => { 
-
-        console.log(originalSignature)
-        let selectedItem = originalSignature.find(item => item.CustId === 12345);
-        let data = selectedItem.img;
-        let buff = new Buffer(data, 'base64');
-        
-        setValue(buff.toString('ascii'));
-
-        console.log('"' + data + '" converted from Base64 to ASCII is "' + value + '"');
-        console.log(selectedItem.img); 
-        console.log("yes its me!")
-    
-    
-    }, [originalSignature])*/
 
     
 
-    
     return(
 
             <div className="signaturePadMini">
                 <div className="signatureContainerMini">
-                    <img src={value} height="80px" alt='signature'/>
+                    <RenderImage enteredCustId={enteredCustId}/>
                 </div>
             </div>
         
@@ -207,24 +161,42 @@ function SignaturePadMini({enteredCustId}){
 
 }
 
+function SignatureStatus({signatureMatch}){
 
-// function CompareButton(){
-//     return(
+    if(signatureMatch>=75){
 
-//             <button type="submit" className="btnCompare"> Compare signatures</button>
-   
+        return <h1>Risk level:<br></br>Low</h1>
 
-//     );   
+    }
+    else if(signatureMatch<75 && signatureMatch>=50){
 
-// }
+        return <h1>Risk level:<br></br>Moderate</h1>
+
+    }
+    else if(signatureMatch>0 && signatureMatch<50){
+        return <h1>Risk level:<br></br>High</h1>
+    }
+
+    return <h1>Risk level:<br></br>........</h1>
+
+
+}
+
 
 
 function ToolContainer(){
 
     //const[matchPercentage,setMatchPercentage]=useState(0);
 
-    const[enteredCustId,setCustId]=useState(12345)
+    const[enteredCustId,setCustId]=useState(0)
+    const[imageURL,setImageURL]=useState("")
     const [ImageFile,setImageFile]=useState("");
+
+    const[signatureMatch,setSignatureMatch]=useState(0);
+    
+    
+
+    var matchPercentageName="c100 p"+ signatureMatch;
 
     const [data,setData]=useState({
 
@@ -237,57 +209,47 @@ function ToolContainer(){
     function post(e){
 
         e.preventDefault();
-        //console.log(data.custId);
         Axios.post("http://localhost:5000/test",{
             
             custId: data.custId,
             address: data.address
 
-    }).then(()=>{
-           alert("successfull insert");
+    }).then((res)=>{
+           
+            console.log("successfull insert");
+            setSignatureMatch(res.data)
+            //SignatureStatus(signatureMatch);
+            console.log(signatureMatch);
+
+           
         })
 
     }
 
-    // var json_data=JSON.parse(data);
-    //     console.log(json_data);
+    
 
     useEffect(()=>{
-        
-        
-        console.log("coming from the search bar :"+enteredCustId);
-       // console.log("coming from the signature pad: "+ ImageFile);
+            
+        console.log("coming from the search bar :"+enteredCustId);//for testing
 
-        data.custId=enteredCustId;
-        //setData.address=ImageFile;
+        data.custId=`${enteredCustId}.jpeg`  //create the test signatures filepath
 
         console.log(data);
         console.log("CustId changed: "+ enteredCustId)
-       // console.log(typeof(enteredCustId));
-
 
     },[enteredCustId]);
 
     useEffect(()=>{
-        
-        
-        //console.log("coming from the search bar :"+enteredCustId);
+
         console.log("coming from the signature pad: "+ ImageFile);
 
-        //setData.custId=enteredCustId;
-        data.address=`${ImageFile}`;
-
-        
-        
+        data.address=`${ImageFile}`;   
         console.log("image changed "+ImageFile)
-        //console.log(typeof(enteredCustId));
-
 
     },[ImageFile]);
 
-
     
-
+    
 
     return(
    
@@ -301,10 +263,29 @@ function ToolContainer(){
                         <button  onClick={post} className="btnCompare"> Compare signatures</button>
                     </div>
                 </div>      
-                <div className="rightAllignedElements">
-                    <SearchBar  setCustId={setCustId}/>
-                    <SignaturePadMini enteredCustId={enteredCustId}/>
-                    <PercentageCircle/>
+                    <div className="rightAllignedElements">
+                        <SearchBar  setCustId={setCustId}/>
+                        <SignaturePadMini enteredCustId={enteredCustId} setImageURL={setImageURL}/>
+
+                        <div className="clearfix">
+
+                            <div className={matchPercentageName}>
+                                <span>{signatureMatch}%</span>
+                                <div className="slice">
+                                <div className="bar"></div>
+                                <div className="fill"></div>
+                            </div>
+
+
+
+                        </div>
+                            <SignatureStatus signatureMatch={signatureMatch}/>
+                        
+                        
+                    </div>
+            
+
+               
                 </div>
                 
             </div>

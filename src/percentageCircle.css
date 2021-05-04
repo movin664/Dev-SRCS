@@ -11,6 +11,7 @@
 
     align-items: center;
     display: flex;
+    flex-direction: columns;
     justify-content: space-evenly;
   }
   .clearfix h3{

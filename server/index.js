@@ -32,17 +32,17 @@ app.get('/api/get',(req,res)=>{
 
 });
 
-app.post('/api/post',(req,res)=>{
+app.post('/api/insert',(req,res)=>{
 
     res.send("hey this is node");
     console.log(custId,address)
 
+    const sqlInsert= "INSERT INTO originals (CustName,CustId,ContactNo,img) VALUES (?,?,?,?)";
+    db.query(sqlInsert,[CustName,CustId,ContactNo,img],(err,result)=>{});
+
 });
 
 
-// var fs=require('fs');
-// console.log("executed before file reading");
-// var data = fs.writeFile('./json_data',
 
 app.listen(3001,()=>{
 
@@ -51,5 +51,5 @@ app.listen(3001,()=>{
 });
 
 
-//writing to json file
+
 

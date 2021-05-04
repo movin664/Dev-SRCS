@@ -114,7 +114,7 @@ def removeWhiteSpace(ilocation, slocation):
 
 def compare(imgone, imgtwo):
     
-    img1 = imgone  # Enter image one here
+    img1 = Image.open(imgone)  # Enter image one here
     img2 = Image.open(imgtwo)  # Enter image two here
     # Resizing the images to be equal to each other in size
     if img1.width < img2.width or img1.height < img2.height:
@@ -166,11 +166,11 @@ def readBlobImg(id):
             connection.close()
 
 
-if __name__ == '__main__':
-    x = r"C:\\Users\\pc\\Desktop\\SDGP\\tests\\y_102.jpeg"
-    y = "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_102.jpeg"
-    removeWhiteSpace(x, y)
-    DetectAngle(y)
-    removeWhiteSpace(y, y)
-    thinArray(y)
-    compare(readBlobImg(101), y)
+# if __name__ == '__main__':
+#     x = r"C:\\Users\\pc\\Desktop\\SDGP\\tests\\y_102.jpeg"
+#     y = "C:\\Users\\pc\\Desktop\\SDGP\\Originals\\y_102.jpeg"
+#     removeWhiteSpace(x, y)
+#     DetectAngle(y)
+#     removeWhiteSpace(y, y)
+#     thinArray(y)
+#     compare(readBlobImg(101), y)

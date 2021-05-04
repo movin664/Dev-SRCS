@@ -8,25 +8,28 @@ CORS(app)
 @app.route("/test", methods=["POST"])
 def getData():
     #variable used for image file path
-    imgAddress = 'D:\\images\\image2.jpeg'
+    # imgAddress = 'D:\\images\\image2.jpeg'
 
     data=request.get_json()
     print(data)
     rawImgString = data["address"]
-    imgString = rawImgString[23:]
-    image_64_decode = base64.b64decode(imgString)
-    image_result = open(imgAddress, 'wb') # create a writable image and write the decoding result
-    image_result.write(image_64_decode)
+    rawString = ".\\src\\Tests\\Originals\\" + rawImgString
+    rawTestImgString = data["custId"]
+    rawTestString = ".\\src\\Tests\\Tests\\" + rawTestImgString
+    # imgString = rawImgString[23:]
+    # image_64_decode = base64.b64decode(imgString)
+    # image_result = open(imgAddress, 'wb') # create a writable image and write the decoding result
+    # image_result.write(image_64_decode)
 
     
 
     #Calling image preprocessing functions
-    removeWhiteSpace(imgAddress, imgAddress)
-    DetectAngle(imgAddress)
-    removeWhiteSpace(imgAddress, imgAddress)
-    thinArray(imgAddress)
+    removeWhiteSpace(rawTestString, rawTestString)
+    DetectAngle(rawTestString)
+    removeWhiteSpace(rawTestString, rawTestString)
+    thinArray(rawTestString)
 
-    percentage = compare(readBlobImg(data["custId"]), imgAddress)
+    percentage = compare(rawString, rawTestString)
     print(percentage)
     return percentage
 
